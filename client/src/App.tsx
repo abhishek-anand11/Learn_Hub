@@ -7,6 +7,7 @@ import HomePage from "@/pages/home-page";
 import AuthPage from "@/pages/auth-page";
 import CoursesPage from "@/pages/courses-page";
 import CategoriesPage from "@/pages/categories-page";
+import AboutPage from "@/pages/about-page";
 import CourseDetailPage from "@/pages/course-detail-page";
 import CheckoutPage from "@/pages/checkout-page";
 import DashboardPage from "@/pages/dashboard-page";
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/auth" component={AuthPage} />
       <Route path="/courses" component={CoursesPage} />
       <Route path="/categories" component={CategoriesPage} />
+      <Route path="/about" component={AboutPage} />
       <Route path="/courses/:id" component={CourseDetailPage} />
       <ProtectedRoute path="/checkout/:courseId" component={CheckoutPage} />
       <ProtectedRoute path="/dashboard" component={DashboardPage} />
