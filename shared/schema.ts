@@ -62,6 +62,7 @@ export const enrollments = pgTable("enrollments", {
   courseId: integer("course_id").references(() => courses.id),
   status: text("status").default("active"), // active, completed, cancelled
   progress: integer("progress").default(0), // percentage
+  completedLessons: text("completed_lessons").array(), // Array of completed lesson IDs
   completedAt: timestamp("completed_at"),
   createdAt: timestamp("created_at").defaultNow(),
 });

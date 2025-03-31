@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { useRoute, Link } from "wouter";
+import { useRoute, Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { Course, Lesson, User as Instructor, Review } from "@shared/schema";
 import MainLayout from "@/components/layout/main-layout";
@@ -28,6 +28,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CourseDetailPage() {
   const [, params] = useRoute<{ id: string }>("/courses/:id");
+  const [, setLocation] = useLocation();
   const courseId = params?.id ? parseInt(params.id) : 0;
   const { user } = useAuth();
   const { toast } = useToast();
@@ -121,7 +122,7 @@ export default function CourseDetailPage() {
     
     if (course?.price && course.price > 0) {
       // If course has a price, redirect to checkout
-      window.location.href = `/checkout/${courseId}`;
+      setLocation(`/checkout/${courseId}`);
     } else {
       // If course is free, enroll directly
       enrollMutation.mutate();
@@ -337,6 +338,21 @@ export default function CourseDetailPage() {
                           </AccordionTrigger>
                           <AccordionContent className="px-4 pb-4 pt-0 pl-12">
                             <p className="text-neutral-600">{lesson.description}</p>
+                            {enrollment && (
+                              <Button 
+                                className="mt-3" 
+                                variant="outline" 
+                                size="sm"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  setLocation(`/courses/${courseId}/lessons/${lesson.id}`);
+                                }}
+                              >
+                                <Play className="h-3 w-3 mr-2" />
+                                Start Lesson
+                              </Button>
+                            )}
                           </AccordionContent>
                         </AccordionItem>
                       ))}
@@ -501,11 +517,22 @@ export default function CourseDetailPage() {
                 {isLoadingEnrollment ? (
                   <Skeleton className="h-10 w-full mb-4" />
                 ) : enrollment ? (
-                  <Link href="/my-courses">
-                    <Button className="w-full mb-4">
-                      Continue Learning
-                    </Button>
-                  </Link>
+                  <>
+                    {/* Find the first lesson to continue or start */}
+                    {lessons && lessons.length > 0 && (
+                      <Button 
+                        className="w-full mb-2"
+                        onClick={() => setLocation(`/courses/${courseId}/lessons/${lessons[0].id}`)}
+                      >
+                        {enrollment.progress > 0 ? "Continue Learning" : "Start Course"}
+                      </Button>
+                    )}
+                    <Link href="/my-courses">
+                      <Button variant="outline" className="w-full mb-4">
+                        View My Courses
+                      </Button>
+                    </Link>
+                  </>
                 ) : (
                   <>
                     <Button 

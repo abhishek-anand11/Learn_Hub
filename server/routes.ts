@@ -133,6 +133,69 @@ export async function registerRoutes(app: Express): Promise<Server> {
       next(error);
     }
   });
+  
+  // Update enrollment progress
+  app.post("/api/enrollments/:id/progress", async (req, res, next) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    try {
+      const enrollmentId = parseInt(req.params.id);
+      const { progress, lessonId } = req.body;
+      
+      const enrollment = await storage.updateEnrollmentProgress(
+        enrollmentId, 
+        progress, 
+        lessonId ? parseInt(lessonId) : undefined
+      );
+      
+      if (progress === 100) {
+        await storage.completeEnrollment(enrollmentId);
+      }
+      
+      res.json(enrollment);
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  // Mark lesson as completed
+  app.post("/api/enrollments/:id/complete-lesson/:lessonId", async (req, res, next) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    try {
+      const enrollmentId = parseInt(req.params.id);
+      const lessonId = parseInt(req.params.lessonId);
+      
+      const enrollment = await storage.getEnrollment(req.user!.id, parseInt(req.body.courseId));
+      if (!enrollment || enrollment.id !== enrollmentId) {
+        return res.status(403).json({ message: "Not authorized to update this enrollment" });
+      }
+      
+      // Get all lessons in the course to calculate progress
+      const course = await storage.getCourse(enrollment.courseId);
+      const lessons = await storage.getLessonsByCourse(enrollment.courseId);
+      
+      if (!course || !lessons || lessons.length === 0) {
+        return res.status(404).json({ message: "Course or lessons not found" });
+      }
+      
+      // Update enrollment with the completed lesson
+      const completedLessons = [...(enrollment.completedLessons || []), lessonId.toString()];
+      // Remove duplicates
+      const uniqueCompletedLessons = Array.from(new Set(completedLessons));
+      const progress = Math.min(100, Math.round((uniqueCompletedLessons.length / lessons.length) * 100));
+      
+      const updatedEnrollment = await storage.updateEnrollmentProgress(enrollmentId, progress, lessonId);
+      
+      res.json(updatedEnrollment);
+    } catch (error) {
+      next(error);
+    }
+  });
 
   // Payment processing
   app.post("/api/create-payment-intent", async (req, res, next) => {

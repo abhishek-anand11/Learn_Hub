@@ -12,6 +12,8 @@ import CourseDetailPage from "@/pages/course-detail-page";
 import CheckoutPage from "@/pages/checkout-page";
 import DashboardPage from "@/pages/dashboard-page";
 import MyCoursesPage from "@/pages/my-courses-page";
+import LessonViewerPage from "@/pages/lesson-viewer-page";
+import CourseCompletePage from "@/pages/course-complete-page";
 import { ProtectedRoute } from "./lib/protected-route";
 import { AuthProvider } from "./hooks/use-auth";
 
@@ -27,6 +29,8 @@ function Router() {
       <ProtectedRoute path="/checkout/:courseId" component={CheckoutPage} />
       <ProtectedRoute path="/dashboard" component={DashboardPage} />
       <ProtectedRoute path="/my-courses" component={MyCoursesPage} />
+      <ProtectedRoute path="/courses/:courseId/lessons/:lessonId" component={LessonViewerPage} />
+      <ProtectedRoute path="/courses/:courseId/complete" component={CourseCompletePage} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -364,6 +364,7 @@ export class MemStorage implements IStorage {
       ...insertEnrollment, 
       id, 
       progress: 0, 
+      completedLessons: [],
       completedAt: null,
       createdAt: now 
     };
@@ -371,15 +372,22 @@ export class MemStorage implements IStorage {
     return enrollment;
   }
 
-  async updateEnrollmentProgress(id: number, progress: number): Promise<Enrollment> {
+  async updateEnrollmentProgress(id: number, progress: number, lessonId?: number): Promise<Enrollment> {
     const enrollment = this.enrollments.get(id);
     if (!enrollment) {
       throw new Error("Enrollment not found");
     }
     
+    // Add the lesson to completedLessons if provided and not already included
+    let completedLessons = enrollment.completedLessons || [];
+    if (lessonId && !completedLessons.includes(lessonId.toString())) {
+      completedLessons = [...completedLessons, lessonId.toString()];
+    }
+    
     const updatedEnrollment = { 
       ...enrollment, 
       progress,
+      completedLessons,
       completedAt: progress === 100 ? new Date() : enrollment.completedAt
     };
     
