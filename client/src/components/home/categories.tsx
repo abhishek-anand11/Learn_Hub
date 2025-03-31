@@ -62,26 +62,22 @@ export default function Categories() {
           )}
           
           {categories && categories.map((category) => (
-            <Link key={category.id} href={`/courses?category=${category.slug}`}>
-              <a className="group flex flex-col items-center p-4 rounded-lg transition-all hover:bg-neutral-50">
-                <div className={`flex items-center justify-center h-16 w-16 rounded-full ${categoryColors[category.slug] || 'bg-primary-100 text-primary-600 group-hover:bg-primary-200'}`}>
-                  {categoryIcons[category.slug] || <Laptop className="text-xl" />}
-                </div>
-                <h3 className="mt-4 text-lg font-medium text-neutral-900">{category.name}</h3>
-                <p className="mt-1 text-sm text-neutral-500">{category.courseCount}+ courses</p>
-              </a>
+            <Link key={category.id} href={`/courses?category=${category.slug}`} className="group flex flex-col items-center p-4 rounded-lg transition-all hover:bg-neutral-50">
+              <div className={`flex items-center justify-center h-16 w-16 rounded-full ${categoryColors[category.slug] || 'bg-primary-100 text-primary-600 group-hover:bg-primary-200'}`}>
+                {categoryIcons[category.slug] || <Laptop className="text-xl" />}
+              </div>
+              <h3 className="mt-4 text-lg font-medium text-neutral-900">{category.name}</h3>
+              <p className="mt-1 text-sm text-neutral-500">{category.courseCount}+ courses</p>
             </Link>
           ))}
         </div>
         
         <div className="mt-10 text-center">
-          <Link href="/categories">
-            <a className="inline-flex items-center text-primary hover:text-primary-700 font-medium">
-              View all categories
-              <svg className="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-              </svg>
-            </a>
+          <Link href="/categories" className="inline-flex items-center text-primary hover:text-primary-700 font-medium">
+            View all categories
+            <svg className="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+            </svg>
           </Link>
         </div>
       </div>

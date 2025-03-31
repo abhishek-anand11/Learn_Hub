@@ -86,8 +86,8 @@ export default function CourseCard({ course }: CourseCardProps) {
         </div>
         
         <h3 className="text-lg font-semibold text-neutral-900 mb-2 line-clamp-2">
-          <Link href={`/courses/${course.id}`}>
-            <a>{course.title}</a>
+          <Link href={`/courses/${course.id}`} className="hover:underline">
+            {course.title}
           </Link>
         </h3>
         
