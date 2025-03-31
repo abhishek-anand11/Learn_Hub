@@ -12,7 +12,10 @@ import { useQuery } from "@tanstack/react-query";
 import { User } from "@shared/schema";
 
 // Helper function to format time from minutes to hours and minutes
-const formatDuration = (minutes: number) => {
+const formatDuration = (minutes: number | null) => {
+  if (minutes === null) {
+    return '0 hours';
+  }
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
   return `${hours} ${hours === 1 ? 'hour' : 'hours'}${mins > 0 ? ` ${mins} min` : ''}`;
@@ -30,7 +33,11 @@ export default function CourseCard({ course }: CourseCardProps) {
   });
 
   // Render stars based on rating
-  const renderStars = (rating: number) => {
+  const renderStars = (rating: number | null) => {
+    if (rating === null) {
+      rating = 0;
+    }
+    
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
@@ -59,7 +66,7 @@ export default function CourseCard({ course }: CourseCardProps) {
     <Card className="overflow-hidden border border-neutral-200 transition-all hover:shadow-md">
       <div className="relative aspect-video">
         <img 
-          src={course.thumbnail} 
+          src={course.thumbnail || undefined} 
           alt={course.title} 
           className="absolute h-full w-full object-cover"
         />
@@ -81,7 +88,7 @@ export default function CourseCard({ course }: CourseCardProps) {
         <div className="flex items-center mb-3">
           {renderStars(course.rating)}
           <span className="ml-2 text-sm text-neutral-600">
-            {course.rating.toFixed(1)} ({course.reviewCount} {course.reviewCount === 1 ? 'review' : 'reviews'})
+            {course.rating !== null ? course.rating.toFixed(1) : '0.0'} ({course.reviewCount} {course.reviewCount === 1 ? 'review' : 'reviews'})
           </span>
         </div>
         
