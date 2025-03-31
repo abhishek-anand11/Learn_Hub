@@ -56,38 +56,28 @@ export default function Footer() {
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
-                    <Link href="/courses?category=programming">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Programming
-                      </a>
+                    <Link href="/courses?category=programming" className="text-base text-neutral-400 hover:text-white">
+                      Programming
                     </Link>
                   </li>
                   <li>
-                    <Link href="/courses?category=data-science">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Data Science
-                      </a>
+                    <Link href="/courses?category=data-science" className="text-base text-neutral-400 hover:text-white">
+                      Data Science
                     </Link>
                   </li>
                   <li>
-                    <Link href="/courses?category=design">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Design
-                      </a>
+                    <Link href="/courses?category=design" className="text-base text-neutral-400 hover:text-white">
+                      Design
                     </Link>
                   </li>
                   <li>
-                    <Link href="/courses?category=marketing">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Marketing
-                      </a>
+                    <Link href="/courses?category=marketing" className="text-base text-neutral-400 hover:text-white">
+                      Marketing
                     </Link>
                   </li>
                   <li>
-                    <Link href="/courses?category=business">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Business
-                      </a>
+                    <Link href="/courses?category=business" className="text-base text-neutral-400 hover:text-white">
+                      Business
                     </Link>
                   </li>
                 </ul>
@@ -98,31 +88,23 @@ export default function Footer() {
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
-                    <Link href="/about">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        About
-                      </a>
+                    <Link href="/about" className="text-base text-neutral-400 hover:text-white">
+                      About
                     </Link>
                   </li>
                   <li>
-                    <Link href="/careers">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Careers
-                      </a>
+                    <Link href="/careers" className="text-base text-neutral-400 hover:text-white">
+                      Careers
                     </Link>
                   </li>
                   <li>
-                    <Link href="/blog">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Blog
-                      </a>
+                    <Link href="/blog" className="text-base text-neutral-400 hover:text-white">
+                      Blog
                     </Link>
                   </li>
                   <li>
-                    <Link href="/partners">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Partners
-                      </a>
+                    <Link href="/partners" className="text-base text-neutral-400 hover:text-white">
+                      Partners
                     </Link>
                   </li>
                 </ul>
@@ -133,31 +115,23 @@ export default function Footer() {
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
-                    <Link href="/help">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Help Center
-                      </a>
+                    <Link href="/help" className="text-base text-neutral-400 hover:text-white">
+                      Help Center
                     </Link>
                   </li>
                   <li>
-                    <Link href="/terms">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Terms of Service
-                      </a>
+                    <Link href="/terms" className="text-base text-neutral-400 hover:text-white">
+                      Terms of Service
                     </Link>
                   </li>
                   <li>
-                    <Link href="/privacy">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Privacy Policy
-                      </a>
+                    <Link href="/privacy" className="text-base text-neutral-400 hover:text-white">
+                      Privacy Policy
                     </Link>
                   </li>
                   <li>
-                    <Link href="/contact">
-                      <a className="text-base text-neutral-400 hover:text-white">
-                        Contact Us
-                      </a>
+                    <Link href="/contact" className="text-base text-neutral-400 hover:text-white">
+                      Contact Us
                     </Link>
                   </li>
                 </ul>

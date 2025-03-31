@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useSearch } from "wouter";
+import { useLocation } from "wouter";
 import { Course } from "@shared/schema";
 import MainLayout from "@/components/layout/main-layout";
 import CourseFilter from "@/components/courses/course-filter";
@@ -34,7 +34,7 @@ interface FilterParams {
 }
 
 export default function CoursesPage() {
-  const [, setLocation] = useSearch();
+  const [, setLocation] = useLocation();
   const initialFilters = parseSearchParams();
   const [filters, setFilters] = useState<FilterParams>(initialFilters);
   const [currentPage, setCurrentPage] = useState(0);
