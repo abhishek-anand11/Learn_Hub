@@ -138,7 +138,11 @@ export default function CourseCard({ course }: CourseCardProps) {
           )}
         </div>
         <div className="text-primary-700 font-bold">
-          {course.discountPrice ? (
+          {course.price === 0 ? (
+            <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">
+              Free
+            </span>
+          ) : course.discountPrice ? (
             <div>
               <span className="text-primary-700">${course.discountPrice.toFixed(2)}</span>
               <span className="ml-2 text-neutral-500 line-through text-sm">${course.price.toFixed(2)}</span>

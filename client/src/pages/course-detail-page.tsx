@@ -469,19 +469,32 @@ export default function CourseDetailPage() {
               
               <CardContent className="p-6">
                 <div className="mb-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="text-3xl font-bold">
-                      ${(course.discountPrice || course.price).toFixed(2)}
+                  {course.price === 0 ? (
+                    <div className="flex items-center">
+                      <div className="text-3xl font-bold text-green-600">
+                        Free
+                      </div>
+                      <div className="ml-2 bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">
+                        Limited Time Offer
+                      </div>
                     </div>
-                    {course.discountPrice && (
-                      <div className="text-neutral-500 line-through">${course.price.toFixed(2)}</div>
-                    )}
-                  </div>
-                  
-                  {course.discountPrice && (
-                    <div className="text-sm text-green-600 font-medium">
-                      {Math.round((1 - course.discountPrice / course.price) * 100)}% off
-                    </div>
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="text-3xl font-bold">
+                          ${(course.discountPrice || course.price).toFixed(2)}
+                        </div>
+                        {course.discountPrice && (
+                          <div className="text-neutral-500 line-through">${course.price.toFixed(2)}</div>
+                        )}
+                      </div>
+                      
+                      {course.discountPrice && (
+                        <div className="text-sm text-green-600 font-medium">
+                          {Math.round((1 - course.discountPrice / course.price) * 100)}% off
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
                 

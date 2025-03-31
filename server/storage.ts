@@ -617,6 +617,24 @@ export class MemStorage implements IStorage {
       isNew: false
     });
     
+    // Add a free course
+    const freeCourse = await this.createCourse({
+      title: "Introduction to Programming",
+      slug: "introduction-to-programming",
+      description: "A beginner-friendly introduction to programming concepts with hands-on exercises.",
+      price: 0, // This is a free course
+      discountPrice: null,
+      thumbnail: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
+      instructorId: instructor1.id,
+      categoryId: programming.id,
+      lessonCount: 20,
+      duration: 900, // 15 hours
+      level: "beginner",
+      isFeatured: true,
+      isBestseller: false,
+      isNew: true
+    });
+    
     // Create some sample lessons for each course
     for (let i = 1; i <= 5; i++) {
       await this.createLesson({
@@ -659,6 +677,34 @@ export class MemStorage implements IStorage {
         courseId: uxCourse.id,
         duration: 40,
         order: i
+      });
+    }
+    
+    // Add lessons for the free course
+    const freeLessonTitles = [
+      "Computer Basics & How Programming Works",
+      "Introduction to Algorithms & Problem Solving",
+      "Variables, Data Types & Operators",
+      "Control Structures: Conditionals & Loops",
+      "Functions & Modular Programming"
+    ];
+    
+    const freeLessonDescriptions = [
+      "Understanding computers and the basics of how programming languages work",
+      "Learn how to break down problems and design step-by-step solutions",
+      "The building blocks of programming: storing and manipulating data",
+      "Making decisions and repeating actions in your programs",
+      "Creating reusable code blocks to organize and simplify your programs"
+    ];
+    
+    for (let i = 0; i < 5; i++) {
+      await this.createLesson({
+        title: freeLessonTitles[i],
+        description: freeLessonDescriptions[i],
+        content: "Detailed lesson content with examples and exercises...",
+        courseId: freeCourse.id,
+        duration: 45,
+        order: i + 1
       });
     }
   }
